@@ -68,7 +68,7 @@ jobs:
       with:
         website-name: site1
         server-computer-name: DESKTOP-GLV3PDG
-        server-username: sengkhimk
+        server-username: sengkhimk-001
         server-password: Password@168
 
 
