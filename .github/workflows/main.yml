@@ -66,9 +66,14 @@ jobs:
     - name: SmarterASP.NET Web API Deploy
       uses: jahbenjah/SmarterASP.NET-web-deploy@1.0.0.alpha.8
       with:
-        website-name: site1
-        server-computer-name: NS1.SITE4NOW.NET
-        server-username: sengkhimk-001
-        server-password: Password@168
+        server: win5157.site4now.net
+        username: sengkhimk-001
+        password: Password@168
+        site: site1  # Replace with your website name
+        local_path: './publish'  # The path to the published application
+        #website-name: site1
+        #server-computer-name: NS1.SITE4NOW.NET
+        #server-username: sengkhimk-001
+        #server-password: Password@168
 
 
