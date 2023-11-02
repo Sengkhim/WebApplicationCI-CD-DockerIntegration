@@ -93,3 +93,4 @@ jobs:
         SMARTERASP_FTP_PASSWORD: Password@168
       run: |
         # Add commands to deploy your Dockerized application to SmarterASP
+        lftp -u sengkhimk-001,Password@168 win5157.site4now.net -e "mirror -R path/to/publish-folder /wwwroot; quit"
