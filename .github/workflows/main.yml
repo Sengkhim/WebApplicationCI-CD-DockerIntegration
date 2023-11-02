@@ -1,0 +1,66 @@
+name: CI/CD with EF Core and Docker
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 7.x
+
+    - name: Build and Test
+      run: |
+        dotnet restore
+        dotnet build
+        dotnet test
+
+    - name: Install lftp
+      run: sudo apt-get update && sudo apt-get install -y lftp
+
+    - name: Build Docker image
+      run: |
+        docker build -t sengkhimk/webapplication1 .
+        docker tag sengkhimk/webapplication1 sengkhimk/webapplication1:latest
+        
+    - name: Login to Docker Hub
+      uses: docker/login-action@v3
+      with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+    - name: Push Docker image
+      run: docker push sengkhimk/webapplication1:latest
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    #Dotnet publish
+    - name: dotnet publish
+      run: |
+        dotnet publish -c Release -o ./publish
+
+    - name: Deploy to SmarterASP
+      uses: SamKirkland/FTP-Deploy-Action@3.1.1
+      with:
+        ftp-server: win5157.site4now.net
+        ftp-username: sengkhimk-001
+        ftp-password: Password@168
+        local-dir: ./publish
+        #remote-dir: h:\root\home\sengkhimk-001\www\site1
+
+
