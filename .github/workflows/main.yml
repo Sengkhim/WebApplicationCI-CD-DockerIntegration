@@ -52,7 +52,7 @@ jobs:
     #Dotnet publish
     - name: dotnet publish
       run: |
-        dotnet publish -c Release -o WebApplication1
+        dotnet publish -c Release -o ./publish
 
     - name: Deploy to SmarterASP
       uses: SamKirkland/FTP-Deploy-Action@3.1.1
@@ -61,7 +61,6 @@ jobs:
         ftp-username: sengkhimk-001
         ftp-password: Password@168
         local-dir: ./publish
-        git-ftp-args: ""
         #remote-dir: h:\root\home\sengkhimk-001\www\site1
 
 
