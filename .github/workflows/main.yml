@@ -39,7 +39,7 @@ jobs:
   #    run: docker push sengkhimk/webapplication1:latest
 
   deploy:
-    needs: build
+    # needs: build
     runs-on: windows-latest
 
     steps:
