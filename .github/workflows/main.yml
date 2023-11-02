@@ -66,7 +66,7 @@ jobs:
     - name: SmarterASP.NET Web API Deploy
       uses: jahbenjah/SmarterASP.NET-web-deploy@1.0.0.alpha.8
       with:
-        server: 205.144.171.157
+        server: "205.144.171.157"
         username: sengkhimk-001
         password: Password@168
         site: site1  # Replace with your website name
