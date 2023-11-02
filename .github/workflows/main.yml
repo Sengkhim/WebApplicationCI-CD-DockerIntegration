@@ -55,7 +55,8 @@ jobs:
         SMARTERASP_FTP_USERNAME: sengkhimk-001
         SMARTERASP_FTP_PASSWORD: Password@168
       run: |
-        apt-get update
-        apt-get install -y ncftp
-        ncftpput -u $SMARTERASP_FTP_USERNAME -p $SMARTERASP_FTP_PASSWORD $SMARTERASP_FTP_SERVER /wwwroot path/to/publish-folder/*
+        wget http://www.ncftp.com/ncftp/ncftp-3.2.6/ncftp-3.2.6.tar.gz
+        tar -zxvf ncftp-3.2.6.tar.gz
+        cd ncftp-3.2.6
+        ./ncftpput -u $SMARTERASP_FTP_USERNAME -p $SMARTERASP_FTP_PASSWORD $SMARTERASP_FTP_SERVER /wwwroot path/to/publish-folder/*
 
