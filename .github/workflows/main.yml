@@ -49,14 +49,18 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Deploy to SmarterASP
-      env:
-        SMARTERASP_FTP_SERVER: win5157.site4now.net
-        SMARTERASP_FTP_USERNAME: sengkhimk-001
-        SMARTERASP_FTP_PASSWORD: Password@168
+    #Dotnet publish
+    - name: dotnet publish
       run: |
-        wget http://www.ncftp.com/ncftp/ncftp-3.2.6/ncftp-3.2.6.tar.gz
-        tar -zxvf ncftp-3.2.6.tar.gz
-        cd ncftp-3.2.6
-        ./ncftpput -u $SMARTERASP_FTP_USERNAME -p $SMARTERASP_FTP_PASSWORD $SMARTERASP_FTP_SERVER /wwwroot path/to/publish-folder/*
+        dotnet publish -c Release -o WebApplication1
+
+    - name: Deploy to SmarterASP
+      uses: SamKirkland/FTP-Deploy-Action@4.0.1
+      with:
+        server: win5157.site4now.net
+        username: sengkhimk-001
+        password: Password@168
+        local-dir: ./publish
+        remote-dir: h:\root\home\sengkhimk-001\www\site1
+
 
