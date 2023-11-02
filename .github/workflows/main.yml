@@ -92,4 +92,5 @@ jobs:
         SMARTERASP_FTP_USERNAME: sengkhimk-001
         SMARTERASP_FTP_PASSWORD: Password@168
       run: |
-        uses: -u sengkhimk-001,Password@168 win5157.site4now.net -e "mirror -R path/to/publish-folder /wwwroot; quit"
+        lftp -e "open -u $SMARTERASP_FTP_USERNAME,$SMARTERASP_FTP_PASSWORD $SMARTERASP_FTP_SERVER; mirror -R path/to/publish-folder /wwwroot; bye"
+
