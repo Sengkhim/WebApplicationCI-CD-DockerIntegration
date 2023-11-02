@@ -16,6 +16,6 @@ public class TextController : ControllerBase
     [HttpGet("text")]
     public IEnumerable<string> Get()
     {
-        return new[] { "Docker", "Dotnet" };
+        return new[] { "Docker", "Dotnet", "CI/CD pipeline" };
     }
 }
