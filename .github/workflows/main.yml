@@ -61,6 +61,7 @@ jobs:
         username: sengkhimk-001
         password: Password@168
         local-dir: ./publish
-        remote-dir: h:\root\home\sengkhimk-001\www\site1
+        git-ftp-args: ""
+        #remote-dir: h:\root\home\sengkhimk-001\www\site1
 
 
