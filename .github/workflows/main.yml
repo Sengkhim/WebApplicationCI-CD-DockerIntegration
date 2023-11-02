@@ -61,7 +61,7 @@ jobs:
       run: dotnet build --configuration Release --no-restore
 
     - name: Publish
-      run: dotnet publish "WebApplication1.csproj" -c Release -o /app/publish /p:UseAppHost=false
+      run: dotnet publish WebApplication1/WebApplication1.csproj --configuration Release --framework netcoreapp3.1 --output ./publish --runtime win-x86 --self-contained true -p:PublishTrimmed=false -p:PublishSingleFile=false
 
     - name: Test with .NET
       run: dotnet test
