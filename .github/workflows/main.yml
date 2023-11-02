@@ -63,17 +63,25 @@ jobs:
     - name: Test with .NET
       run: dotnet test
 
-    - name: SmarterASP.NET Web API Deploy
-      uses: jahbenjah/SmarterASP.NET-web-deploy@1.0.0.alpha.8
+    - uses: ChristopheLav/iis-deploy@v1
       with:
-        server: "URI: win5157.site4now.net"
-        username: sengkhimk-001
-        password: Password@168
-        site: site1  # Replace with your website name
-        local_path: './publish'  # The path to the published application
-        #website-name: site1
-        #server-computer-name: NS1.SITE4NOW.NET
-        #server-username: sengkhimk-001
-        #server-password: Password@168
+        website-name: text_server
+        msdeploy-service-url: http://localhost:8034/
+        msdeploy-username: asus
+        msdeploy-password: 1122
+        source-path: ${{ github.workspace }}\website\publish
+
+    #- name: SmarterASP.NET Web API Deploy
+    #  uses: jahbenjah/SmarterASP.NET-web-deploy@1.0.0.alpha.8
+    #  with:
+    #    server: "URI: win5157.site4now.net"
+    #    username: sengkhimk-001
+    #    password: Password@168
+    #    site: site1  # Replace with your website name
+    #    local_path: './publish'  # The path to the published application
+    #    #website-name: site1
+    #    #server-computer-name: NS1.SITE4NOW.NET
+    #    #server-username: sengkhimk-001
+    #    #server-password: Password@168
 
 
