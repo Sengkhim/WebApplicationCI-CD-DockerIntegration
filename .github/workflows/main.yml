@@ -1,4 +1,44 @@
-name: ci
+#name: ci
+
+#on:
+#  push:
+#    branches:
+#      - main
+
+#jobs:
+#  build:
+#    runs-on: ubuntu-latest
+#    steps:
+#      -
+#        name: Checkout
+#        uses: actions/checkout@v4
+#      -
+#        name: Login to Docker Hub
+#        uses: docker/login-action@v3
+#        with:
+#          username: ${{ secrets.DOCKER_USERNAME }}
+#          password: ${{ secrets.DOCKERHUB_TOKEN }}
+#      -
+#        name: Set up Docker Buildx
+#        uses: docker/setup-buildx-action@v3
+#      -
+#        name: Build and test
+#        uses: docker/build-push-action@v5
+#        with:
+#          context: .
+#          target: build
+#          load: true
+#      -
+#        name: Build and push
+#        uses: docker/build-push-action@v5
+#        with:
+#          context: .
+#          push: true
+#          target: final
+#          tags: sengkhimk/webapplication1:latest
+
+
+name: CI/CD with EF Core and Docker
 
 on:
   push:
@@ -8,31 +48,48 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
-      -
-        name: Checkout
-        uses: actions/checkout@v4
-      -
-        name: Login to Docker Hub
-        uses: docker/login-action@v3
-        with:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 7.x
+
+    - name: Build and Test
+      run: |
+        dotnet restore
+        dotnet build
+        dotnet test
+
+    - name: Build Docker image
+      run: |
+        docker build -t sengkhimk/webapplication1 .
+        docker tag sengkhimk/webapplication1 sengkhimk/webapplication1:latest
+        
+    - name: Login to Docker Hub
+      uses: docker/login-action@v3
+      with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-      -
-        name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-      -
-        name: Build and test
-        uses: docker/build-push-action@v5
-        with:
-          context: .
-          target: build
-          load: true
-      -
-        name: Build and push
-        uses: docker/build-push-action@v5
-        with:
-          context: .
-          push: true
-          target: final
-          tags: sengkhimk/webapplication1:latest
+
+    - name: Push Docker image
+      run: docker push sengkhimk/webapplication1:latest
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Deploy to SmarterASP
+      env:
+        SMARTERASP_FTP_SERVER: win5157.site4now.net
+        SMARTERASP_FTP_USERNAME: sengkhimk-001
+        SMARTERASP_FTP_PASSWORD: Password@168
+      run: |
+        # Add commands to deploy your Dockerized application to SmarterASP
