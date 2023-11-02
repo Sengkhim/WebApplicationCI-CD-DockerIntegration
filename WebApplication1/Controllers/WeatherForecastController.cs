@@ -16,6 +16,7 @@ public class TextController : ControllerBase
     [HttpGet("text")]
     public IEnumerable<string> Get()
     {
-        return new[] { "Docker", "Dotnet", "CI/CD pipeline" };
+        return new[] { "Docker", "Dotnet EF Core", "CI/CD pipeline" };
     }
 }
+//Password@168, sengkhimk-001
