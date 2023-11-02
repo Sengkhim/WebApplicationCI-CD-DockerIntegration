@@ -24,9 +24,6 @@ jobs:
         dotnet build
         dotnet test
 
-    - name: Install lftp
-      run: sudo apt-get update && sudo apt-get install -y lftp
-
     - name: Build Docker image
       run: |
         docker build -t sengkhimk/webapplication1 .
@@ -61,7 +58,7 @@ jobs:
       run: dotnet build --configuration Release --no-restore
 
     - name: Publish
-      run: dotnet publish WebApplication1/WebApplication1.csproj --configuration Release --framework netcoreapp3.1 --output ./publish --runtime win-x86 --self-contained true -p:PublishTrimmed=false -p:PublishSingleFile=false
+      run: dotnet publish WebApplication1/WebApplication1.csproj --configuration Release --framework net7.0 --output ./publish --runtime win-x86 --self-contained true -p:PublishTrimmed=false -p:PublishSingleFile=false
 
     - name: Test with .NET
       run: dotnet test
