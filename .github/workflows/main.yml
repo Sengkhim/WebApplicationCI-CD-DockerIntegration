@@ -46,7 +46,7 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Set up .NET
+    - name: Set up .NET Core
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 7.x
@@ -63,16 +63,12 @@ jobs:
     - name: Test with .NET
       run: dotnet test
 
-    - name: Deploy to SmarterASP.NET
-      run: |
-        C:\Program Files\IIS\Microsoft Web Deploy V3\msdeploy.exe -verb:sync -allowUntrusted -source:recycleApp -dest:recycleApp="sengkhimk-001-site1",recycleMode="StopAppPool",computerName="/MsDeploy.axd?site=sengkhimk-001-site1",username="sengkhimk-001",password="Password@168",AuthType="Basic"
-      #uses: jahbenjah/SmarterASP.NET-web-deploy@1.0.0
-      #with:
-      #    website-name: sengkhimk-001-site1
-      #    #server-computer-name: ${{ secrets.SERVER_COMPUTER_NAME }}
-      #    server-username: sengkhimk-001
-      #    server-password: Password@168
-      #    source-path: 'h:/root/home/sengkhimk-001/www'
-      #    target-path: '/site1/'
+    - name: SmarterASP.NET Web Deploy
+      uses: jahbenjah/SmarterASP.NET-web-deploy@1.0.0.alpha.8
+      with:
+        website-name: sengkhimk-001-site1
+        server-computer-name: https://nt8.unoeuro.com:8172
+        server-username: sengkhimk-001
+        server-password: Password@168
 
 
