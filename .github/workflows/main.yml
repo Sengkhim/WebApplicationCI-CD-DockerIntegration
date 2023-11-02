@@ -68,7 +68,7 @@ jobs:
       with:
         website-name: site1
         #server-computer-name: NS1.SITE4NOW.NET
-        server-username: sengkhimk-001
+        server-username: sengkhimk
         server-password: Password@168
 
 
