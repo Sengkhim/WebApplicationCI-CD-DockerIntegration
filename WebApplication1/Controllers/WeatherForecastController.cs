@@ -17,7 +17,7 @@ public class TextController : ControllerBase
     public IEnumerable<string> Get()
     {
         return new[] {
-            "Docker", "Dotnet EF Core", 
+            "Docker", "Dotnet EF Core", "CI / CD pipline" 
         };
     }
 }
