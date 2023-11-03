@@ -63,13 +63,15 @@ jobs:
     - name: Test with .NET
       run: dotnet test
 
+
+    #- name: SmarterASP.NET Web API Deploy 
     - uses: ChristopheLav/iis-deploy@v1
       with:
         website-name: text_server
         msdeploy-service-url: http://localhost:8034/
         msdeploy-username: asus
         msdeploy-password: 1122
-        source-path: ${{ github.workspace }}\website\publish
+        #source-path: ${{ github.workspace }}\website\publish
 
     #- name: SmarterASP.NET Web API Deploy
     #  uses: jahbenjah/SmarterASP.NET-web-deploy@1.0.0.alpha.8
