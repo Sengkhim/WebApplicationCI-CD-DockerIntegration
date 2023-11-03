@@ -7,7 +7,7 @@ on:
 
 jobs:
   build:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     steps:
     - name: Checkout code
@@ -64,7 +64,7 @@ jobs:
   #    run: dotnet test
 
 
-  #  #- name: SmarterASP.NET Web API Deploy 
+  #  - name: SmarterASP.NET Web API Deploy 
   #  - uses: ChristopheLav/iis-deploy@v1
   #    with:
   #      website-name: text_server
