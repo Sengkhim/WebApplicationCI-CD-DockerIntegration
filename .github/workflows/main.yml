@@ -7,7 +7,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     steps:
     - name: Checkout code
@@ -38,39 +38,39 @@ jobs:
     - name: Push Docker image
       run: docker push sengkhimk/webapplication1:latest
 
-  deploy:
-    needs: build
-    runs-on: windows-latest
+  #deploy:
+  #  needs: build
+  #  runs-on: windows-latest
 
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+  #  steps:
+  #  - name: Checkout code
+  #    uses: actions/checkout@v2
 
-    - name: Set up .NET Core
-      uses: actions/setup-dotnet@v1
-      with:
-        dotnet-version: 7.x
+  #  - name: Set up .NET Core
+  #    uses: actions/setup-dotnet@v1
+  #    with:
+  #      dotnet-version: 7.x
 
-    - name: Install dependencies
-      run: dotnet restore
+  #  - name: Install dependencies
+  #    run: dotnet restore
 
-    - name: Build
-      run: dotnet build --configuration Release --no-restore
+  #  - name: Build
+  #    run: dotnet build --configuration Release --no-restore
 
-    - name: Publish
-      run: dotnet publish WebApplication1/WebApplication1.csproj --configuration Release --framework net7.0 --output ./publish --runtime win-x86 --self-contained true -p:PublishTrimmed=false -p:PublishSingleFile=false
+  #  - name: Publish
+  #    run: dotnet publish WebApplication1/WebApplication1.csproj --configuration Release --framework net7.0 --output ./publish --runtime win-x86 --self-contained true -p:PublishTrimmed=false -p:PublishSingleFile=false
 
-    - name: Test with .NET
-      run: dotnet test
+  #  - name: Test with .NET
+  #    run: dotnet test
 
 
-    #- name: SmarterASP.NET Web API Deploy 
-    - uses: ChristopheLav/iis-deploy@v1
-      with:
-        website-name: text_server
-        msdeploy-service-url: http://localhost:8034/
-        msdeploy-username: asus
-        msdeploy-password: 1122
+  #  #- name: SmarterASP.NET Web API Deploy 
+  #  - uses: ChristopheLav/iis-deploy@v1
+  #    with:
+  #      website-name: text_server
+  #      msdeploy-service-url: http://localhost:8034/
+  #      msdeploy-username: asus
+  #      msdeploy-password: 1122
         #source-path: ${{ github.workspace }}\website\publish
 
     #- name: SmarterASP.NET Web API Deploy
